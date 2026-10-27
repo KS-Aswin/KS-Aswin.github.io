@@ -11,7 +11,8 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"></noscript>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%231A73E8'/%3E%3Ctext x='50' y='67' font-size='52' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EA%3C/text%3E%3C/svg%3E">
 <style>
 :root{
@@ -55,20 +56,19 @@ button{font:inherit}
 .hero-l{flex:1 1 480px;min-width:0}
 .over{font-size:14px;font-weight:500;color:var(--blue);letter-spacing:.1px}
 h1{margin:12px 0 0;font-size:clamp(38px,5.4vw,60px);line-height:1.14;font-weight:400;letter-spacing:-.5px}
-h1 .hl{background:linear-gradient(90deg,var(--blue),var(--red) 50%,var(--yellow));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:shine 6s linear infinite}
-@keyframes shine{to{background-position:-200% 0}}
+h1 .hl{background:linear-gradient(90deg,var(--blue),var(--red) 50%,var(--yellow));-webkit-background-clip:text;background-clip:text;color:transparent}
 .lead{margin:20px 0 0;max-width:560px;font-size:18px;line-height:28px;color:var(--sub)}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 
 /* hero photo: flips to an illustrated portrait, gently tilts and floats */
-@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
 .hero-r{flex:0 1 380px;min-width:260px;max-width:380px;margin:0 auto}
 .pw{position:relative;animation:float 7s ease-in-out infinite}
 @keyframes float{50%{transform:translateY(-10px)}}
-.ring{position:absolute;inset:-6px;border-radius:38px;background:conic-gradient(from var(--a),#1A73E8,#EA4335,#F9AB00,#188038,#1A73E8);animation:spin 8s linear infinite}
-.ring::after{content:'';position:absolute;inset:0;border-radius:inherit;background:inherit;filter:blur(26px);opacity:.35;z-index:-1}
-@keyframes spin{to{--a:360deg}}
+.glow{position:absolute;inset:-6px;border-radius:38px;background:conic-gradient(#1A73E8,#EA4335,#F9AB00,#188038,#1A73E8);filter:blur(26px);opacity:.3}
+.ring{position:absolute;inset:-6px;border-radius:38px;overflow:hidden}
+.ring::before{content:'';position:absolute;left:50%;top:50%;width:200%;aspect-ratio:1;transform:translate(-50%,-50%) rotate(0deg);background:conic-gradient(#1A73E8,#EA4335,#F9AB00,#188038,#1A73E8);animation:spin 8s linear infinite}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
 .tilt{position:relative;transition:transform .25s var(--ease)}
 .flip{display:block;width:100%;aspect-ratio:4/5;padding:0;border:0;background:none;cursor:pointer;position:relative;transform-style:preserve-3d;transform:perspective(1100px) rotateY(0);transition:transform .9s var(--ease)}
 .flip.on{transform:perspective(1100px) rotateY(180deg)}
@@ -174,8 +174,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
 /* motion */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
 .rv.in{opacity:1;transform:none}
-.up{opacity:0;animation:up .8s var(--ease) forwards}
-@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.up{opacity:0;animation:up .6s var(--ease) forwards}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.sl{animation:sl .6s var(--ease) both}
+@keyframes sl{from{transform:translateY(16px)}to{transform:none}}
 
 @media (max-width:760px){
   .wrap{padding:0 20px}
@@ -216,10 +218,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
   <div class="wrap">
     <div class="hero">
       <div class="hero-l">
-        <div class="over up" style="animation-delay:.05s">Software Engineer · Full Stack Developer</div>
-        <h1 class="up" style="animation-delay:.15s">Hi, I'm Aswin. I build <span class="hl">enterprise web apps</span> and AI features.</h1>
-        <p class="lead up" style="animation-delay:.3s">2+ years shipping features with React.js, ColdFusion, SQL and REST APIs. I also build with OpenAI, Anthropic and AWS.</p>
-        <div class="cta up" style="animation-delay:.45s">
+        <div class="over sl">Software Engineer · Full Stack Developer</div>
+        <h1 class="sl">Hi, I'm Aswin. I build <span class="hl">enterprise web apps</span> and AI features.</h1>
+        <p class="lead sl">2+ years shipping features with React.js, ColdFusion, SQL and REST APIs. I also build with OpenAI, Anthropic and AWS.</p>
+        <div class="cta sl">
           <a class="btn btn-fill" href="Aswin_KS_Resume.pdf" download>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg>
             Download resume
@@ -227,13 +229,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
           <a class="btn btn-out" href="#contact">Contact me</a>
         </div>
       </div>
-      <div class="hero-r up" style="animation-delay:.25s">
+      <div class="hero-r sl">
         <div class="pw">
-          <span class="ring" aria-hidden="true"></span>
+          <span class="glow" aria-hidden="true"></span><span class="ring" aria-hidden="true"></span>
           <div class="tilt" id="tilt">
             <button class="flip" id="flip" type="button" aria-pressed="false" aria-label="Show the illustrated portrait">
-              <span class="face front"><img src="img/portrait.webp" width="800" height="800" alt="Portrait of Aswin K S" fetchpriority="high"></span>
-              <span class="face back"><img src="img/caricature.webp" width="720" height="1080" alt="Illustrated portrait of Aswin with a laptop, camera, cricket bat and fishing rod" loading="lazy"></span>
+              <span class="face front"><img src="img/portrait-480.webp" srcset="img/portrait-480.webp 480w, img/portrait.webp 800w" sizes="(max-width: 760px) 260px, 380px" width="800" height="800" alt="Portrait of Aswin K S" fetchpriority="high" decoding="async"></span>
+              <span class="face back"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/caricature-560.webp" width="560" height="840" alt="Illustrated portrait of Aswin with a laptop, camera, cricket bat and fishing rod" decoding="async"></span>
             </button>
           </div>
           <span class="fc c1" style="--fd:-1s" aria-hidden="true"><i style="background:#1A73E8"></i>React.js</span>
@@ -245,10 +247,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
     </div>
 
     <div class="stats">
-        <div class="card stat lift up" style="animation-delay:.3s"><div class="v" style="color:var(--blue)"><span data-n="2">2</span>+</div><div class="k">Years building enterprise features</div></div>
-        <div class="card stat lift up" style="animation-delay:.4s"><div class="v" style="color:var(--red)"><span data-n="200">200</span>+</div><div class="k">API endpoints auto-documented</div></div>
-        <div class="card stat lift up" style="animation-delay:.5s"><div class="v" style="color:#E37400"><span data-n="3">3</span></div><div class="k">AI features shipped</div></div>
-        <div class="card stat lift up" style="animation-delay:.6s"><div class="v" style="color:var(--green)"><span data-n="5">5</span></div><div class="k">Developers guided on AI tools</div></div>
+        <div class="card stat lift up" style="animation-delay:.1s"><div class="v" style="color:var(--blue)"><span data-n="2">2</span>+</div><div class="k">Years building enterprise features</div></div>
+        <div class="card stat lift up" style="animation-delay:.15s"><div class="v" style="color:var(--red)"><span data-n="200">200</span>+</div><div class="k">API endpoints auto-documented</div></div>
+        <div class="card stat lift up" style="animation-delay:.2s"><div class="v" style="color:#E37400"><span data-n="3">3</span></div><div class="k">AI features shipped</div></div>
+        <div class="card stat lift up" style="animation-delay:.25s"><div class="v" style="color:var(--green)"><span data-n="5">5</span></div><div class="k">Developers guided on AI tools</div></div>
     </div>
 
     <section id="work">
@@ -260,7 +262,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
       <div class="sec-h rv"><h2>Experience</h2><p>Jan 2024 – Present</p></div>
       <div class="exp">
         <div class="card exp-side photo rv">
-          <img class="bgimg" src="img/work.webp" width="1200" height="675" alt="" loading="lazy">
+          <img class="bgimg" src="img/work-640.webp" srcset="img/work-640.webp 640w, img/work.webp 1200w" sizes="(max-width: 760px) 100vw, 420px" width="1200" height="675" alt="" loading="lazy" decoding="async">
           <div class="d">Techversant Infotech</div>
           <div class="r">Associate Software Engineer</div>
           <div class="c">Full Stack Developer</div>
@@ -285,7 +287,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
 
     <section id="contact" style="padding:24px 0 0">
       <div class="cb rv">
-        <img class="photo" src="img/night.webp" width="900" height="1200" alt="" loading="lazy">
+        <img class="photo" src="img/night-640.webp" srcset="img/night-640.webp 640w, img/night.webp 900w" sizes="(max-width: 760px) 100vw, 520px" width="900" height="1200" alt="" loading="lazy" decoding="async">
         <span class="fade" aria-hidden="true"></span>
         <span class="orb o1" aria-hidden="true"></span><span class="orb o2" aria-hidden="true"></span><span class="orb o3" aria-hidden="true"></span>
         <div class="in">
@@ -501,6 +503,16 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
   var hint = document.getElementById('flip-hint');
   var tilt = document.getElementById('tilt');
   if (flip) {
+    var backImg = document.querySelector('.face.back img');
+    function loadBack() {
+      if (backImg && backImg.getAttribute('data-src')) {
+        backImg.src = backImg.getAttribute('data-src');
+        backImg.removeAttribute('data-src');
+      }
+    }
+    ['pointerenter', 'touchstart', 'focus', 'click'].forEach(function (ev) {
+      flip.addEventListener(ev, loadBack, { passive: true });
+    });
     flip.addEventListener('click', function () {
       var on = flip.classList.toggle('on');
       flip.parentNode.parentNode.classList.toggle('flipped', on);
