@@ -144,29 +144,32 @@ h2{margin:0;font-size:32px;line-height:40px;font-weight:400}
 .edu .u{margin-top:6px;font-size:14px;color:var(--sub)}
 
 /* contact */
-.contact{margin:24px 0 72px;padding:56px 40px;background:var(--blue-tint);border-radius:28px}
-.contact h2{font-size:clamp(32px,4.4vw,48px);line-height:1.2}
-.contact p{margin:12px 0 0;font-size:18px;color:#3C4043;max-width:560px}
-.contact .cta{margin-top:28px}
-.mail{display:inline-block;margin-top:24px;font-size:clamp(20px,3vw,28px);color:var(--blue);border-bottom:2px solid currentColor}
+.cb{position:relative;overflow:hidden;display:flex;align-items:center;min-height:440px;margin:24px 0 72px;border-radius:28px;background:#0B1F44;color:#fff}
+.cb .photo{position:absolute;top:0;right:0;bottom:0;width:46%;height:100%;object-fit:cover;object-position:50% 18%}
+.cb .fade{position:absolute;top:0;right:0;bottom:0;width:46%;background:linear-gradient(90deg,#0B1F44 0%,rgba(11,31,68,.55) 35%,rgba(11,31,68,0) 100%)}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.45;animation:drift 12s ease-in-out infinite alternate;pointer-events:none}
+.o1{width:300px;height:300px;background:var(--blue);left:-80px;top:-100px}
+.o2{width:220px;height:220px;background:var(--red);left:34%;bottom:-120px;animation-delay:-4s}
+.o3{width:180px;height:180px;background:var(--yellow);left:18%;top:-90px;opacity:.28;animation-delay:-8s}
+@keyframes drift{to{transform:translate(40px,30px)}}
+.cb .in{position:relative;z-index:2;max-width:680px;padding:64px 56px}
+.cb .over{font-size:14px;font-weight:500;color:#A8C7FA}
+.cb h2{margin:12px 0 0;font-size:clamp(32px,4.4vw,48px);line-height:1.2}
+.cb .s{margin:14px 0 0;max-width:460px;font-size:18px;line-height:28px;color:#D2E3FC}
+.cb .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.cb .btn-w{background:#fff;color:#0B1F44;font-size:16px;padding:14px 28px}
+.cb .btn-w:hover{box-shadow:0 0 0 6px rgba(255,255,255,.18)}
+.cb .btn-g{border-color:rgba(255,255,255,.35);color:#fff;background:rgba(255,255,255,.06);padding:12px 20px}
+.cb .btn-g:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.5)}
+.cb :focus-visible{outline-color:#fff}
+.arr{display:inline-block;transition:transform .25s var(--ease)}
+.btn:hover .arr{transform:translateX(5px)}
+.addr{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:20px;font-size:15px;color:#A8C7FA}
+.copy{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid rgba(255,255,255,.35);border-radius:999px;background:rgba(255,255,255,.06);color:#fff;font-size:12px;font-weight:500;cursor:pointer;transition:background .2s}
+.copy:hover{background:rgba(255,255,255,.16)}
+.copy.done{background:#fff;color:#0B1F44;border-color:#fff}
 footer{border-top:1px solid var(--line);padding:24px 0;font-size:14px;color:var(--sub)}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
-
-/* contact form */
-.contact-grid{display:flex;flex-wrap:wrap;align-items:flex-start;gap:40px 56px}
-.contact-l{flex:1 1 320px;min-width:0}
-.form{flex:1 1 380px;min-width:0;display:grid;gap:16px;padding:28px;background:#fff;border-radius:20px;box-shadow:0 1px 2px rgba(60,64,67,.3),0 1px 3px 1px rgba(60,64,67,.15)}
-.field label{display:block;margin-bottom:6px;font-size:14px;font-weight:500;color:#3C4043}
-.field input,.field textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--text);font:inherit;font-size:16px;transition:border-color .2s,box-shadow .2s}
-.field textarea{min-height:120px;resize:vertical}
-.field input:focus,.field textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,115,232,.25)}
-.field.bad input,.field.bad textarea{border-color:var(--red)}
-.form .btn{justify-self:start}
-.form .btn[disabled]{opacity:.6;cursor:default}
-.form .f-status{margin:0;min-height:20px;max-width:none;font-size:14px;line-height:20px}
-.form .f-status.ok{color:var(--green)}
-.form .f-status.err{color:var(--red)}
-.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
 /* motion */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
@@ -178,11 +181,14 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
   .wrap{padding:0 20px}
   .menu a.l{display:none}
   .hero{padding-top:32px}
+  .cb{display:block;min-height:0;margin-bottom:56px;border-radius:24px}
+  .cb .photo{position:relative;display:block;width:100%;height:240px;object-position:50% 20%}
+  .cb .fade{top:0;right:0;bottom:auto;width:100%;height:240px;background:linear-gradient(180deg,rgba(11,31,68,0) 40%,#0B1F44 100%)}
+  .cb .in{padding:8px 24px 36px}
+  .cb .row .btn-w{width:100%;justify-content:center}
   .hero-r{order:-1;max-width:260px;min-width:0}
   .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
   .fc.c1{left:-12px}.fc.c2{right:-10px}.fc.c3{left:-8px}
-  .contact{padding:36px 24px;border-radius:24px}
-  .form{padding:20px}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -278,29 +284,24 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
     </section>
 
     <section id="contact" style="padding:24px 0 0">
-      <div class="contact rv">
-        <div class="contact-grid">
-          <div class="contact-l">
-            <h2>Let's work together</h2>
-            <p>I'm happy to talk about full stack, API and AI feature work.</p>
-            <a class="mail" href="mailto:aswinks1231@gmail.com">aswinks1231@gmail.com</a>
-            <div class="cta">
-              <a class="btn btn-fill" href="Aswin_KS_Resume.pdf" download>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg>
-                Download resume
-              </a>
-              <a class="btn btn-out" href="https://linkedin.com/in/aswin-k-s" target="_blank" rel="noopener">LinkedIn</a>
-              <a class="btn btn-out" href="https://github.com/KS-Aswin" target="_blank" rel="noopener">GitHub</a>
-            </div>
+      <div class="cb rv">
+        <img class="photo" src="img/night.webp" width="900" height="1200" alt="" loading="lazy">
+        <span class="fade" aria-hidden="true"></span>
+        <span class="orb o1" aria-hidden="true"></span><span class="orb o2" aria-hidden="true"></span><span class="orb o3" aria-hidden="true"></span>
+        <div class="in">
+          <div class="over">Contact</div>
+          <h2>Let's work together</h2>
+          <p class="s">I'm happy to talk about full stack, API and AI feature work.</p>
+          <div class="row">
+            <a class="btn btn-w" href="mailto:aswinks1231@gmail.com?subject=Hello%20Aswin">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+              Email me<span class="arr" aria-hidden="true">&rarr;</span>
+            </a>
+            <a class="btn btn-g" href="Aswin_KS_Resume.pdf" download>Resume</a>
+            <a class="btn btn-g" href="https://linkedin.com/in/aswin-k-s" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn btn-g" href="https://github.com/KS-Aswin" target="_blank" rel="noopener">GitHub</a>
           </div>
-          <form class="form" id="contact-form" novalidate>
-            <div class="field"><label for="cf-name">Name</label><input id="cf-name" name="name" type="text" autocomplete="name" maxlength="100" required></div>
-            <div class="field"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email" autocomplete="email" maxlength="150" required></div>
-            <div class="field"><label for="cf-msg">Message</label><textarea id="cf-msg" name="message" maxlength="3000" required></textarea></div>
-            <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-            <button class="btn btn-fill" type="submit" id="cf-send">Send message</button>
-            <p class="f-status" id="cf-status" role="status" aria-live="polite"></p>
-          </form>
+          <div class="addr"><span id="addr-text">aswinks1231@gmail.com</span><button class="copy" id="copy-mail" type="button">Copy</button><span class="hp" id="copy-status" role="status" aria-live="polite" style="position:absolute;left:-9999px"></span></div>
         </div>
       </div>
     </section>
@@ -457,12 +458,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
     });
   });
 
-  /* ---------- settings: fill these two in after you sign up (both free) ----------
-     web3formsKey   : access key from web3forms.com (sent to your email). Public by design.
+  /* settings: fill this in after you sign up (free)
      goatcounterCode: your GoatCounter site code, e.g. "aswin" for aswin.goatcounter.com
-     Leave a value empty and that feature stays off. */
-  var SETTINGS = { web3formsKey: '', goatcounterCode: '' };
-  var MY_EMAIL = 'aswinks1231@gmail.com';
+     Leave it empty and visit tracking stays off. */
+  var SETTINGS = { goatcounterCode: '' };
 
   /* visit tracking: no cookies, and we store no visitor data ourselves */
   if (SETTINGS.goatcounterCode) {
@@ -473,72 +472,30 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
     document.head.appendChild(gc);
   }
 
-  /* contact form */
-  var form = document.getElementById('contact-form');
-  var sendBtn = document.getElementById('cf-send');
-  var status = document.getElementById('cf-status');
-
-  function say(kind, text) {
-    status.className = 'f-status ' + kind;
-    status.textContent = text;
+  /* copy email */
+  var copyBtn = document.getElementById('copy-mail');
+  var copyStatus = document.getElementById('copy-status');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function () {
+      var text = 'aswinks1231@gmail.com';
+      function done() {
+        copyBtn.textContent = 'Copied';
+        copyBtn.classList.add('done');
+        if (copyStatus) copyStatus.textContent = 'Email address copied';
+        setTimeout(function () { copyBtn.textContent = 'Copy'; copyBtn.classList.remove('done'); if (copyStatus) copyStatus.textContent = ''; }, 2000);
+      }
+      function fallback() {
+        var t = document.createElement('textarea');
+        t.value = text; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
+        document.body.appendChild(t); t.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(t);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback);
+      else fallback();
+    });
   }
-  function mark(input, bad) {
-    input.parentNode.classList.toggle('bad', bad);
-    if (bad) input.setAttribute('aria-invalid', 'true'); else input.removeAttribute('aria-invalid');
-  }
 
-  form.addEventListener('submit', function (ev) {
-    ev.preventDefault();
-    var name = form.elements.name, email = form.elements.email, msg = form.elements.message;
-    var n = name.value.trim(), m = email.value.trim(), t = msg.value.trim();
-    var okMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(m);
-
-    mark(name, !n); mark(email, !okMail); mark(msg, !t);
-    if (!n || !okMail || !t) {
-      say('err', !n ? 'Please enter your name.' : !okMail ? 'Please enter a valid email.' : 'Please write a message.');
-      (!n ? name : !okMail ? email : msg).focus();
-      return;
-    }
-
-    /* bots fill the hidden field; pretend it worked and send nothing */
-    if (form.elements.website.value) { say('ok', 'Thanks, message sent.'); form.reset(); return; }
-
-    /* no access key yet: open the visitor's email app instead */
-    if (!SETTINGS.web3formsKey) {
-      var body = t + '\n\n' + n + '\n' + m;
-      window.location.href = 'mailto:' + MY_EMAIL + '?subject=' + encodeURIComponent('Portfolio message from ' + n) + '&body=' + encodeURIComponent(body);
-      say('ok', 'Opening your email app. If nothing opens, write to ' + MY_EMAIL + '.');
-      return;
-    }
-
-    sendBtn.disabled = true;
-    sendBtn.textContent = 'Sending...';
-    say('', '');
-
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        access_key: SETTINGS.web3formsKey,
-        subject: 'Portfolio message from ' + n,
-        from_name: 'Portfolio website',
-        name: n, email: m, message: t
-      })
-    })
-      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok && d.success, d: d }; }); })
-      .then(function (res) {
-        if (!res.ok) throw new Error('send failed');
-        say('ok', 'Thanks, your message was sent. I will reply by email.');
-        form.reset();
-      })
-      .catch(function () {
-        say('err', 'Could not send your message. Please email me at ' + MY_EMAIL + '.');
-      })
-      .then(function () {
-        sendBtn.disabled = false;
-        sendBtn.textContent = 'Send message';
-      });
-  });
   /* hero photo: flip to the illustrated portrait, and tilt with the pointer */
   var flip = document.getElementById('flip');
   var hint = document.getElementById('flip-hint');
