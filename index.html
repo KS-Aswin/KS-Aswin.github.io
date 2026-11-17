@@ -686,6 +686,15 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
   var stack = [], busy = false, started = false, opened = false;
 
   function toBottom() { log.scrollTop = log.scrollHeight; }
+  /* after the options settle, bring the newest answer into view: its top if it is taller than the window, otherwise the bottom */
+  function reveal(node) {
+    requestAnimationFrame(function () {
+      var lr = log.getBoundingClientRect(), nr = node.getBoundingClientRect();
+      var max = Math.max(0, log.scrollHeight - log.clientHeight);
+      var target = nr.height + 24 > log.clientHeight ? log.scrollTop + (nr.top - lr.top) - 12 : max;
+      log.scrollTo({ top: Math.max(0, Math.min(target, max)), behavior: reduce ? 'auto' : 'smooth' });
+    });
+  }
   function typing() {
     var d = el('div', 'msg bot'); var b = el('div', 'b dots');
     b.appendChild(document.createElement('i')); b.appendChild(document.createElement('i')); b.appendChild(document.createElement('i'));
@@ -736,7 +745,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
     if (userText) addUser(userText);
     var t = typing();
     setTimeout(function () {
-      t.remove(); addBot(node); stack.push({ node: node, parent: parent }); setOptions(node, parent); busy = false;
+      t.remove(); addBot(node); stack.push({ node: node, parent: parent }); setOptions(node, parent); reveal(log.lastElementChild); busy = false;
     }, reduce ? 0 : 600);
   }
   function choose(node, parent) { if (!busy) reply(node, parent, node.label); }
@@ -750,7 +759,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
     var t = typing();
     setTimeout(function () {
       t.remove(); var d = el('div', 'msg bot'); d.appendChild(el('div', 'b', 'Sure. What else would you like to know?')); log.appendChild(d);
-      stack = [{ node: root_, parent: null }]; setOptions(root_, null); toBottom(); busy = false;
+      stack = [{ node: root_, parent: null }]; setOptions(root_, null); reveal(log.lastElementChild); busy = false;
     }, reduce ? 0 : 450);
   }
   function start() {
@@ -758,7 +767,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
     busy = true; var t = typing();
     setTimeout(function () {
       t.remove(); addBot({ say: root_.say, facts: [], links: [], go: null });
-      stack = [{ node: root_, parent: null }]; setOptions(root_, null); busy = false;
+      stack = [{ node: root_, parent: null }]; setOptions(root_, null); reveal(log.lastElementChild); busy = false;
     }, reduce ? 0 : 700);
   }
   function openChat() {
@@ -819,6 +828,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
         addBot({ say: "I only know what is on Aswin's resume and this page, so I can't answer that. You can email him, or pick a topic.", facts: [], links: [['Email Aswin', 'mailto:aswinks1231@gmail.com?subject=Hello%20Aswin']], go: null });
         stack = [{ node: root_, parent: null }]; setOptions(root_, null);
       }
+      reveal(log.lastElementChild);
       busy = false;
     }, reduce ? 0 : 600);
   }
