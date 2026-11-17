@@ -608,7 +608,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
   });
 
   /* ---------- chatbot: options tree ---------- */
-  function N(label, say, kids, o) { o = o || {}; return { label: label, say: say, kids: kids || [], facts: o.facts || [], links: o.links || [], go: o.go || null }; }
+  function N(label, say, kids, o) { o = o || {}; return { label: label, say: say, kids: kids || [], facts: o.facts || [], links: o.links || [], go: o.go || null, kw: (o.kw || '').toLowerCase() }; }
   function G(sel, label) { return { sel: sel, label: label || 'Show on the page' }; }
   var RESUME = ['Open resume', 'Aswin_KS_Resume.pdf'];
 
@@ -637,10 +637,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
   var aTools = N('AI tools he uses', 'Claude Code, Cursor, GitHub Copilot and Codex for coding, and Herdr for running tasks in parallel.', [], { go: G('#ai') });
   var aDaily = N('His daily AI workflow', 'He uses custom AI skills and AI coding tools across a normal working day.', [aSkills, aParallel, aTools], { go: G('#ai') });
   var aLead = N('AI adoption lead role', 'He is one of the AI adoption leads on the project. He guided and monitored a team of 5 developers in using AI tools, and reported progress to the client in weekly meetings.', [], { go: G('#ai') });
-  var aApis = N('AI skills and APIs', 'He integrates the OpenAI and Anthropic APIs, builds RAG with Pinecone for vector search, and streams answers with Server-Sent Events. He also uses Amazon Polly for narration.', [], { go: G('#skills', 'Show skills') });
+  var aApis = N('AI skills and APIs', 'He integrates the OpenAI and Anthropic APIs, builds RAG with Pinecone for vector search, and streams answers with Server-Sent Events. He also uses Amazon Polly for narration.', [], { kw: 'openai anthropic claude gpt llm rag pinecone', go: G('#skills', 'Show skills') });
   var aBuilt = N('AI features he built', 'He worked on three AI features in BIS. Which one?', [pRag, pCourse, pForm], { go: G('#work', 'Show projects') });
 
-  var tWork = N('What he uses at work', 'At work he builds with React.js, ColdFusion, SQL and REST APIs.', [], { facts: [['Docs and tests', 'Swagger / OpenAPI, Postman'], ['Cloud', 'AWS S3, Amazon Polly'], ['Source control', 'Git (worktrees), GitHub']], go: G('#skills', 'Show skills') });
+  var tWork = N('What he uses at work', 'At work he builds with React.js, ColdFusion, SQL and REST APIs.', [], { kw: 'react coldfusion sql rest api apis', facts: [['Docs and tests', 'Swagger / OpenAPI, Postman'], ['Cloud', 'AWS S3, Amazon Polly'], ['Source control', 'Git (worktrees), GitHub']], go: G('#skills', 'Show skills') });
   var tPersonal = N('What he uses in personal projects', 'His own projects use a wider mix of tools.', [], { facts: [['Web', 'Next.js, TanStack Start, React 19, TypeScript'], ['Back end', 'Node.js, PostgreSQL, Supabase, Convex'], ['Mobile', 'Kotlin, Jetpack Compose']], go: G('#skills', 'Show skills') });
   function skill(l, t) { return N(l, t[0], [], { facts: [['Skills', t[1]]], go: G('#skills', 'Show skills') }); }
   var tAll = N('Full skill list', 'His resume groups skills into seven areas. Which one?', [
@@ -659,25 +659,26 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
   var eCloud = N('Cloud and testing', 'He integrated AWS S3 for file handling into application modules and tested APIs with Postman.', [], { go: G('#experience') });
   var eMca = N('MCA', 'Master of Computer Applications, 2021 to 2023, at Mohandas College of Engineering and Technology, Trivandrum (APJ Abdul Kalam Technological University).', [], { go: G('#education') });
   var eBca = N('BCA', 'Bachelor of Computer Applications, 2018 to 2021, at NSS College Rajakumari, Idukki (Mahatma Gandhi University).', [], { go: G('#education') });
-  var eEdu = N('Education', 'Two degrees in computer applications.', [eMca, eBca], { go: G('#education') });
+  var eEdu = N('Education', 'Two degrees in computer applications.', [eMca, eBca], { kw: 'education degree degrees college university studied study qualification qualifications', go: G('#education') });
 
   var root_ = N('Home', "Hi! I'm Aswin's portfolio assistant. I answer from his resume and the projects on this page. What would you like to know?", [
     N('Who is Aswin?', 'Aswin K S is a full stack developer with 2+ years of experience building enterprise web apps. He works with React.js, ColdFusion, SQL and REST APIs, and builds AI features with OpenAI, Anthropic and AWS.', [
+      N('How much experience does he have?', 'Aswin has 2+ years of professional experience as a full stack developer. He has worked at Techversant Infotech since January 2024.', [], { facts: [['Total', '2+ years'], ['Current role', 'Associate Software Engineer, Techversant Infotech'], ['Since', 'January 2024']], kw: 'years experience yoe long senior fresher expertise', go: G('#experience') }),
       N('What is he best at?', 'His main work is full stack features and APIs, plus AI features.', [], { facts: [['Front end', 'React.js'], ['Back end', 'ColdFusion and SQL'], ['APIs', 'REST APIs, Swagger / OpenAPI'], ['AI', 'RAG chatbot, course builder, form builder']] }),
-      N('Key numbers', 'A few numbers from his work.', [], { facts: [['Experience', '2+ years on enterprise features'], ['API docs', '200+ endpoints documented automatically'], ['AI features', '3 shipped'], ['AI adoption', 'Guided 5 developers']], go: G('.stats', 'Show on the page') }),
-      N('Where is he based?', 'Aswin is based in Rajakumari, Idukki, Kerala, India.'),
-      N('Show his resume', 'Here is his resume as a PDF.', [], { links: [RESUME] })
+      N('Key numbers', 'A few numbers from his work.', [], { kw: 'numbers stats metrics achievements', facts: [['Experience', '2+ years on enterprise features'], ['API docs', '200+ endpoints documented automatically'], ['AI features', '3 shipped'], ['AI adoption', 'Guided 5 developers']], go: G('.stats', 'Show on the page') }),
+      N('Where is he based?', 'Aswin is based in Rajakumari, Idukki, Kerala, India.', [], { kw: 'based location live lives city country kerala india address' }),
+      N('Show his resume', 'Here is his resume as a PDF.', [], { links: [RESUME], kw: 'resume cv download pdf' })
     ]),
     N('What has he built?', 'He has built eight projects. Which group would you like to see?', [gAI, gApi, gPersonal, gAll], { go: G('#work', 'Show projects') }),
     N('How does he use AI?', 'AI is part of his daily development work, and he has also built AI features into a real app. What would you like to see?', [aDaily, aBuilt, aLead, aApis], { go: G('#ai') }),
     N('Which technologies does he use?', 'It depends on what you want to know.', [tWork, tPersonal, aApis, tAll], { go: G('#skills', 'Show skills') }),
-    N('Where has he worked?', 'Since January 2024 he has worked at Techversant Infotech as an Associate Software Engineer (Full Stack Developer).', [eBis, eClient, eDev, eCloud, eEdu], { go: G('#experience') }),
+    N('Where has he worked?', 'Since January 2024 he has worked at Techversant Infotech as an Associate Software Engineer (Full Stack Developer).', [eBis, eClient, eDev, eCloud, eEdu], { kw: 'worked work company employer job current role techversant', go: G('#experience') }),
     N('How can I contact him?', 'He is happy to talk about full stack, API and AI feature work. How would you like to reach him?', [
-      N('Email', 'His email is aswinks1231@gmail.com.', [], { links: [['Email Aswin', 'mailto:aswinks1231@gmail.com?subject=Hello%20Aswin']] }),
+      N('Email', 'His email is aswinks1231@gmail.com.', [], { kw: 'email mail gmail address', links: [['Email Aswin', 'mailto:aswinks1231@gmail.com?subject=Hello%20Aswin']] }),
       N('LinkedIn', 'You can find him on LinkedIn.', [], { links: [['Open LinkedIn', 'https://linkedin.com/in/aswin-k-s']] }),
       N('GitHub', 'His code is on GitHub.', [], { links: [['Open GitHub', 'https://github.com/KS-Aswin']] }),
       N('Resume (PDF)', 'Here is his resume as a PDF.', [], { links: [RESUME] })
-    ], { go: G('#contact', 'Show contact') })
+    ], { kw: 'contact reach hire hiring connect phone call touch', go: G('#contact', 'Show contact') })
   ]);
 
   /* ---------- chatbot: window ---------- */
@@ -780,8 +781,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
     if (n !== root_) flat.push({ n: n, ctx: ctx });
     n.kids.forEach(function (k) { walk(k, n, seen); });
   })(root_, null, []);
-  var STOP = ' the an is are of to and or for in on with he his him what how does do can me my about tell show who which where when it that this '.split(' ');
-  var SYN = { cv: 'resume', hire: 'contact', hiring: 'contact', mail: 'email', location: 'based', city: 'based', live: 'based', project: 'built', projects: 'built', stack: 'technologies', tech: 'technologies', skill: 'technologies', skills: 'technologies', degree: 'education', college: 'education', university: 'education', job: 'worked', company: 'worked', experience: 'worked', role: 'worked' };
+  var STOP = ' the an is are of to and or for in on with he his him what how does do can me my about tell show who which where when it that this you your have has did will was get any been are '.split(' ');
+  var SYN = { cv: 'resume', hire: 'contact', hiring: 'contact', mail: 'email', location: 'based', city: 'based', live: 'based', project: 'built', projects: 'built', stack: 'technologies', tech: 'technologies', skill: 'technologies', skills: 'technologies',  };
   function words(q) {
     var out = [];
     q.toLowerCase().replace(/[^a-z0-9.+# ]/g, ' ').split(/\s+/).forEach(function (w) {
@@ -794,8 +795,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
   function best(q) {
     var ws = words(q), top = null, topScore = 0;
     flat.forEach(function (x) {
-      var l = x.n.label.toLowerCase(), h = haystack(x.n), s = 0;
-      ws.forEach(function (w) { if (l.indexOf(w) > -1) s += 3; else if (h.indexOf(w) > -1) s += 1; });
+      var l = x.n.label.toLowerCase(), h = haystack(x.n), k = ' ' + x.n.kw + ' ', s = 0;
+      ws.forEach(function (w) { if (k.indexOf(' ' + w + ' ') > -1) s += 4; else if (l.indexOf(w) > -1) s += 3; else if (h.indexOf(w) > -1) s += 1; });
       if (s > 0 && !x.n.kids.length) s += 0.5;
       if (s > topScore) { topScore = s; top = x; }
     });
